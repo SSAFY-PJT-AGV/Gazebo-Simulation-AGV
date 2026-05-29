@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="agv_factory_world">
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- A Zone -->
+    <model name="zone_A">
+      <static>true</static>
+      <pose>-2 -2 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- B Zone -->
+    <model name="zone_B">
+      <static>true</static>
+      <pose>-0.8 -2 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+          <material><ambient>0 1 0 1</ambient><diffuse>0 1 0 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- C Zone -->
+    <model name="zone_C">
+      <static>true</static>
+      <pose>-2 -3.2 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- D Zone -->
+    <model name="zone_D">
+      <static>true</static>
+      <pose>-0.8 -3.2 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Container Zone -->
+    <model name="container_zone">
+      <static>true</static>
+      <pose>3.5 0 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 3.0 0.06</size></box></geometry>
+          <material><ambient>0 0 1 1</ambient><diffuse>0 0 1 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 3.0 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Final Box Zone -->
+    <model name="final_box_zone">
+      <static>true</static>
+      <pose>0 3 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>1.2 0.8 0.06</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>1.2 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- In/Out Zone -->
+    <model name="inout_zone">
+      <static>true</static>
+      <pose>-4 2.5 0.03 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>1.2 0.8 0.06</size></box></geometry>
+          <material><ambient>0.5 0 1 1</ambient><diffuse>0.5 0 1 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>1.2 0.8 0.06</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Cross Zone -->
+    <model name="cross_zone">
+      <static>true</static>
+      <pose>-3 -1 0.04 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.9 0.9 0.08</size></box></geometry>
+          <material><ambient>1 0 1 0.7</ambient><diffuse>1 0 1 0.7</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.9 0.9 0.08</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Black Road Lines -->
+    <model name="road_line_horizontal_1">
+      <static>true</static>
+      <pose>0 -2.6 0.07 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>7.0 0.12 0.04</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="road_line_vertical_1">
+      <static>true</static>
+      <pose>3.0 0 0.07 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.12 5.5 0.04</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="road_line_horizontal_2">
+      <static>true</static>
+      <pose>-1 2.5 0.07 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>6.0 0.12 0.04</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="road_line_vertical_2">
+      <static>true</static>
+      <pose>-3 -0.1 0.07 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.12 5.2 0.04</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- AGV01 -->
+    <model name="agv01">
+      <static>false</static>
+      <pose>3.5 -2.5 0.2 0 0 0</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry><box><size>0.6 0.4 0.3</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.6 0.4 0.3</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- AGV02 -->
+    <model name="agv02">
+      <static>false</static>
+      <pose>3.5 2.5 0.2 0 0 0</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry><box><size>0.6 0.4 0.3</size></box></geometry>
+          <material><ambient>0.2 0.2 0.2 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.6 0.4 0.3</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>
