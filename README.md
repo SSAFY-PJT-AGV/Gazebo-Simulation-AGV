@@ -3,6 +3,6 @@ Gazebo simulation for AGV smart factory project
 
 #최종 MAP 파일
 
-AGV_factory_final.world
+agv_factory_final_box_agv.world
 
-make_agv_world_final.py
+make_agv_world_final_box_agv.py
