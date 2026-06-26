@@ -2,7 +2,7 @@
 
 본 폴더는 SSAFY AGV 프로젝트의 **시뮬레이션 파트**입니다.
 
-본 시뮬레이션은
+본 시뮬레이션은 
 **서버가 관리하는 AGV 상태와 위치 정보를 Gazebo에 반영하여 제조물류 흐름을 시각화하는 상태 기반 시뮬레이션**입니다.
 
 ---
@@ -20,6 +20,7 @@
 
 ## 2. 전체 구조
 
+```text
 실제 AGV
     ↓ 상태 / 마커 / 적재 정보 전송
 
@@ -36,6 +37,7 @@ Gazebo Launcher
     ↓
 
 Gazebo 실행
+```
 
 시뮬레이션은 크게 두 가지 방식으로 실행할 수 있습니다.
 
@@ -48,6 +50,7 @@ Gazebo 실행
 
 ## 3. 디렉토리 구조
 
+```text
 agv_sim/
 ├── config/
 │   ├── marker_map.json
@@ -78,11 +81,14 @@ agv_sim/
 ├── resource/
 ├── test/
 └── README.md
+```
 
+---
 
 ## 4. 폴더별 역할
 
 | 폴더 | 역할 |
+|---|---|
 | `config/` | 마커 좌표, AGV 이동 경로, 구역 간 route, 전체 작업 시나리오 JSON 저장 |
 | `scripts/` | AGV 이동 실행, 서버 API 연동, Gazebo 실행 연동, ArUco 인식 코드 저장 |
 | `worlds/final/` | 최종 Gazebo world 생성 파일 및 최종 world 파일 저장 |
@@ -90,7 +96,7 @@ agv_sim/
 | `worlds/archive/` | 이전 버전 world 파일 백업 |
 | `test/` | ROS2 패키지 기본 테스트 파일 |
 
-
+---
 
 ## 5. 핵심 파일 설명
 
@@ -119,6 +125,7 @@ agv_sim/
 Gazebo world 안에는 다음 요소들이 구현되어 있습니다.
 
 | 구성 요소 | 설명 |
+|---|---|
 | 공장 MAP | 검정색 라인 기반 제조물류 이동 경로 |
 | AGV01 | 자재 보관 구역에서 자재를 픽업하여 컨베이어 투입 구역으로 운반 |
 | AGV02 | 완제품 회수, 부족 자재 보급, 빈 상자 회수 담당 |
@@ -132,11 +139,49 @@ Gazebo world 안에는 다음 요소들이 구현되어 있습니다.
 
 ---
 
+## 7. AGV 역할
+
+| AGV | 주요 역할 |
+|---|---|
+| AGV01 | 자재 보관 구역에서 CHIP, SENSOR를 픽업하여 컨베이어 투입 구역으로 운반 |
+| AGV02 | 완제품 회수, 부족 자재 보급, 빈 상자 회수 담당 |
+
+### AGV01 흐름
+
+```text
+자재 보관 구역
+    ↓
+자재 픽업
+    ↓
+컨베이어 투입 구역 이동
+    ↓
+자재 하역
+    ↓
+필요 시 교차구역에서 보급 자재 회수
+```
+
+### AGV02 흐름
+
+```text
+입출고 구역
+    ↓
+빈 상자 또는 보급 상자 픽업
+    ↓
+완제품 회수 / 부족 자재 보급
+    ↓
+교차구역 빈 상자 회수
+    ↓
+입출고 구역 반납
+```
+
+---
+
 ## 8. AGV 이동 구조
 
 AGV는 실제 바퀴 물리 제어를 사용하지 않고,  
 **Gazebo 모델의 pose를 직접 변경하는 방식**으로 이동합니다.
 
+```text
 scenario_plan
     ↓
 zone_route_map
@@ -144,8 +189,11 @@ zone_route_map
 line_path_map
     ↓
 gz model 명령으로 AGV pose 변경
+```
 
 예시:
+
+```text
 MATERIAL_BOX_STORAGE_TO_CONVEYOR_START
     ↓
 [4, 3, 2, 1]
@@ -155,6 +203,9 @@ MATERIAL_BOX_STORAGE_TO_CONVEYOR_START
 2_to_1 좌표 목록
     ↓
 AGV01 이동
+```
+
+---
 
 ## 9. JSON 파일 역할
 
@@ -193,8 +244,9 @@ AGV01과 AGV02의 전체 작업 순서를 정의합니다.
 
 예시:
 
+```text
 MATERIAL_BOX_STORAGE_TO_CONVEYOR_START = [4, 3, 2, 1]
-
+```
 
 즉, 사람이 이해하기 쉬운 구역명을 AGV가 이동할 waypoint 목록으로 바꿔줍니다.
 
@@ -206,13 +258,14 @@ MATERIAL_BOX_STORAGE_TO_CONVEYOR_START = [4, 3, 2, 1]
 
 예시:
 
+```text
 4_to_5 = [
   [0.0, -2.55, 0.16],
   [0.688, -2.55, 0.16],
   [1.333, -2.55, 0.16],
   [1.892, -2.55, 0.16]
 ]
-
+```
 
 `line_path_map`의 waypoint는 실제 ArUco 마커가 아니라,  
 **Gazebo 시뮬레이션에서 AGV가 따라갈 가상 경로점**입니다.
@@ -225,6 +278,7 @@ ArUco marker_id와 위치 의미를 연결하는 기준표입니다.
 
 예시:
 
+```text
 marker_id
     ↓
 위치 이름
@@ -232,7 +286,7 @@ marker_id
 Gazebo 좌표
     ↓
 설명
-
+```
 
 `marker_map`은 위치 인식/설명용 기준표이고,  
 AGV의 실제 이동은 `line_path_map`을 기준으로 수행합니다.
@@ -243,15 +297,18 @@ AGV의 실제 이동은 `line_path_map`을 기준으로 수행합니다.
 
 ### 10-1. Gazebo world 실행
 
-
+```bash
 source /opt/ros/humble/setup.bash
 gazebo --verbose ~/gazebo_agv_ws/src/agv_sim/worlds/final/agv_factory_final_box_agv_v2.world
+```
+
+---
 
 ### 10-2. 로컬 시나리오 기반 실행
 
 서버 없이 전체 시나리오를 확인할 때 사용합니다.
 
-
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 
 python3 move_agv_from_scenario_v2_empty_box_return.py \
@@ -259,10 +316,13 @@ python3 move_agv_from_scenario_v2_empty_box_return.py \
   --zone-route-map ../config/zone_route_map_final_cross_7_9_v2_empty_box_return.json \
   --line-path-map ../config/line_path_map_final_v6_cross_7_9_names.json \
   --speed 4.0
-  
+```
+
+---
+
 ### 10-3. 특정 구간 이동 테스트
 
-
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 
 python3 move_agv_follow_line_path.py \
@@ -270,16 +330,26 @@ python3 move_agv_follow_line_path.py \
   --line-path-map ../config/line_path_map_final_v6_cross_7_9_names.json \
   --route 5,6,7,8,9 \
   --speed 4.0
+```
 
+예시:
 
+| route | 의미 |
+|---|---|
+| `5,6,7,8,9` | AGV01 시작점 근처에서 오른쪽 세로 라인까지 이동 테스트 |
+| `1,2,3,4,5` | 하단 라인 이동 테스트 |
+| `13,12,11,10,9` | AGV02 시작점에서 오른쪽 방향 이동 테스트 |
+
+---
 
 ### 10-4. 서버 API 기반 실행
 
 서버 API에서 AGV 상태를 받아 Gazebo에 반영할 때 사용합니다.
 
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 python3 move_agv_from_api.py
-
+```
 
 서버 API 응답에는 다음 정보가 필요합니다.
 
@@ -299,19 +369,26 @@ python3 move_agv_from_api.py
 
 관제 웹에서 FACTORY MAP을 클릭하면 로컬 launcher 서버가 Gazebo를 실행합니다.
 
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 python3 gazebo_launcher.py
+```
 
 상태 확인:
 
+```bash
 curl http://127.0.0.1:5001/health
+```
 
 Gazebo 실행 요청:
 
+```bash
 curl -X POST http://127.0.0.1:5001/open-gazebo
+```
 
 정상 흐름:
 
+```text
 관제 웹 FACTORY MAP 클릭
     ↓
 http://127.0.0.1:5001/open-gazebo 호출
@@ -323,7 +400,7 @@ Gazebo world 실행
 move_agv_from_api.py 실행
     ↓
 서버 상태 기반 AGV 이동
-
+```
 
 ---
 
@@ -332,11 +409,13 @@ move_agv_from_api.py 실행
 Gazebo 안의 AGV 모델에는 RGB 카메라가 포함되어 있습니다.
 
 | AGV | ROS2 image topic |
+|---|---|
 | AGV01 | `/AGV01/agv01_camera/image_raw` |
 | AGV02 | `/AGV02/agv02_camera/image_raw` |
 
 ArUco 인식 흐름:
 
+```text
 Gazebo 카메라
     ↓
 ROS2 image_raw topic
@@ -344,17 +423,24 @@ ROS2 image_raw topic
 OpenCV ArUco
     ↓
 marker_id 검출
+```
 
 AGV01 ArUco 실행:
 
-
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 python3 detect_aruco_demo.py
+```
 
 AGV02 ArUco 실행:
 
+```bash
 cd ~/gazebo_agv_ws/src/agv_sim/scripts
 python3 detect_aruco_demo_agv02.py
+```
+
+ArUco 인식은 AGV 이동 제어의 핵심 로직이 아니라,  
+실제 AGV의 비전 기반 위치 인식 구조를 Gazebo에서도 검증하기 위한 보조 기능입니다.
 
 ---
 
@@ -362,6 +448,7 @@ python3 detect_aruco_demo_agv02.py
 
 서버 API 기반 실행 시 구조는 다음과 같습니다.
 
+```text
 실제 AGV
     ↓ status / marker / payload 전송
 
@@ -373,6 +460,7 @@ move_agv_from_api.py
 
 Gazebo
     ↓ AGV01 / AGV02 위치 반영
+```
 
 `move_agv_from_api.py`는 서버에서 받은 `status`에 따라 다음과 같이 처리합니다.
 
@@ -392,6 +480,7 @@ Gazebo
 ## 13. 기술 스택
 
 | 구분 | 기술 |
+|---|---|
 | 시뮬레이션 | Gazebo |
 | 로봇 미들웨어 | ROS2 Humble |
 | 개발 언어 | Python |
@@ -399,6 +488,7 @@ Gazebo
 | 데이터 연동 | REST API, JSON |
 | 웹-Gazebo 실행 연동 | Flask |
 
+---
 
 ## 14. 주의사항
 
@@ -413,8 +503,10 @@ Gazebo
 
 ## 15. 핵심 요약
 
+```text
 Gazebo는 공장 MAP과 AGV 작업 흐름을 시각화합니다.
 AGV 이동은 실제 바퀴 제어가 아니라 Gazebo 모델 pose 변경 방식입니다.
 로컬 시나리오는 scenario_plan, zone_route_map, line_path_map을 기반으로 실행됩니다.
 서버 연동 시에는 move_agv_from_api.py가 서버 상태를 읽어 AGV 위치를 반영합니다.
 ArUco 인식은 Gazebo 카메라 기반 위치 인식 검증용으로 사용됩니다.
+```
