@@ -1,0 +1,142 @@
+{
+  "description": "Real ArUco marker ID to Gazebo position map",
+  "coordinate_rule": {
+    "origin": "center of map",
+    "x_direction": "right positive",
+    "y_direction": "up positive",
+    "z_for_agv": 0.16,
+    "excluded_marker": "marker on green square"
+  },
+  "markers": {
+    "1": {
+      "name": "P01",
+      "description": "purple area, left vertical lower",
+      "position": {
+        "x": -3.15,
+        "y": -1.05,
+        "z": 0.16
+      }
+    },
+    "2": {
+      "name": "P02",
+      "description": "bottom-left curve",
+      "position": {
+        "x": -2.55,
+        "y": -2.05,
+        "z": 0.16
+      }
+    },
+    "3": {
+      "name": "P03",
+      "description": "bottom-left, near blue area",
+      "position": {
+        "x": -1.45,
+        "y": -2.55,
+        "z": 0.16
+      }
+    },
+    "4": {
+      "name": "P04",
+      "description": "bottom-center",
+      "position": {
+        "x": 0.0,
+        "y": -2.55,
+        "z": 0.16
+      }
+    },
+    "5": {
+      "name": "P05",
+      "description": "bottom-right, near red area",
+      "position": {
+        "x": 1.45,
+        "y": -2.55,
+        "z": 0.16
+      }
+    },
+    "6": {
+      "name": "P06",
+      "description": "bottom-right curve",
+      "position": {
+        "x": 2.55,
+        "y": -1.95,
+        "z": 0.16
+      }
+    },
+    "7": {
+      "name": "P07",
+      "description": "right vertical lower",
+      "position": {
+        "x": 3.15,
+        "y": -0.95,
+        "z": 0.16
+      }
+    },
+    "8": {
+      "name": "P08",
+      "description": "right vertical middle, near yellow area",
+      "position": {
+        "x": 3.15,
+        "y": 0.25,
+        "z": 0.16
+      }
+    },
+    "9": {
+      "name": "P09",
+      "description": "right vertical upper",
+      "position": {
+        "x": 3.15,
+        "y": 1.15,
+        "z": 0.16
+      }
+    },
+    "10": {
+      "name": "P10",
+      "description": "top-right curve",
+      "position": {
+        "x": 2.55,
+        "y": 2.0,
+        "z": 0.16
+      }
+    },
+    "11": {
+      "name": "P11",
+      "description": "top-right straight line",
+      "position": {
+        "x": 1.45,
+        "y": 2.55,
+        "z": 0.16
+      }
+    },
+    "12": {
+      "name": "P12",
+      "description": "top-center, near orange area",
+      "position": {
+        "x": 0.0,
+        "y": 2.55,
+        "z": 0.16
+      }
+    },
+    "13": {
+      "name": "P13",
+      "description": "top-left straight line",
+      "position": {
+        "x": -1.55,
+        "y": 2.55,
+        "z": 0.16
+      }
+    },
+    "14": {
+      "name": "P14",
+      "description": "top-left curve, opposite side of conveyor",
+      "position": {
+        "x": -2.7,
+        "y": 2.1,
+        "z": 0.16
+      }
+    }
+  },
+  "routes": {
+    "counter_clockwise": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    "loop": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1]
+  }
+}

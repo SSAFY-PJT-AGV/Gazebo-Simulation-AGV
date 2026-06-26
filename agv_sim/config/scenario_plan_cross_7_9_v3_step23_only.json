@@ -1,0 +1,657 @@
+{
+  "scenario_name": "two_agv_full_demo",
+  "description": "AGV01 material supply and AGV02 finished box / replenishment collaboration scenario",
+  "version": "sim_local_cross_7_9_v3_empty_material_box_return_step23_only",
+  "note": "교차구역에서 보급 상자 위치(7번)와 빈 자재 상자 위치(9번)를 분리하고, AGV01이 CROSS_EMPTY_BOX_STOP에 내려놓은 EMPTY_MATERIAL_BOX를 AGV02가 OUTBOUND 작업 완료 후 회수하여 INBOUND로 반납하도록 step 20~27을 수정한 시나리오 / Object-motion final demo uses steps 1~23 only; steps 24+ are intentionally removed.",
+  "server_pending_items": {
+    "custom_commands": [
+      {
+        "command": "PICK_FROM_FINISHED_BOX_STORAGE",
+        "meaning": "완제품 상자 보관 구역에서 완제품 상자 픽업",
+        "server_status": "not_confirmed"
+      },
+      {
+        "command": "DROP_TO_INBOUND",
+        "meaning": "교차구역에서 회수한 빈 자재 상자를 입고 구역에 반납",
+        "server_status": "not_confirmed"
+      }
+    ],
+    "custom_payloads": [
+      {
+        "payload": "EMPTY_FINISHED_BOX",
+        "meaning": "빈 완제품 상자",
+        "server_status": "not_confirmed"
+      },
+      {
+        "payload": "EMPTY_MATERIAL_BOX",
+        "meaning": "빈 자재 상자",
+        "server_status": "not_confirmed"
+      },
+      {
+        "payload": "SUPPLY_BOX",
+        "meaning": "보급용 자재 상자",
+        "server_status": "not_confirmed"
+      },
+      {
+        "payload": "FINISHED_BOX_CAR_CONTROL_UNIT",
+        "meaning": "완제품 상자, CAR_CONTROL_UNIT",
+        "server_status": "not_confirmed"
+      }
+    ]
+  },
+  "status_rule": {
+    "MOVING": "route를 따라 이동",
+    "LOADING": "적재 동작",
+    "UNLOADING": "하역 동작",
+    "WAITING": "대기",
+    "IDLE": "정지"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "description": "AGV01 moves to material storage and AGV02 moves to inbound",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "MOVING",
+          "from": "AGV01_START",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "AGV01_START_TO_MATERIAL_BOX_STORAGE",
+          "payload": "EMPTY"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_INBOUND",
+          "status": "MOVING",
+          "from": "AGV02_START",
+          "to": "INBOUND",
+          "route": "AGV02_START_TO_INBOUND",
+          "payload": "EMPTY"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 2,
+      "description": "AGV01 picks CHIP and AGV02 picks empty finished box",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "LOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_INBOUND",
+          "status": "LOADING",
+          "from": "INBOUND",
+          "to": "INBOUND",
+          "route": null,
+          "payload": "EMPTY_FINISHED_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 3,
+      "description": "AGV01 moves to conveyor start with CHIP and AGV02 moves to finished box storage with empty finished box",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "MOVING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "CONVEYOR_START",
+          "route": "MATERIAL_BOX_STORAGE_TO_CONVEYOR_START",
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "DROP_EMPTY_BOX",
+          "status": "MOVING",
+          "from": "INBOUND",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": "INBOUND_TO_FINISHED_BOX_STORAGE",
+          "payload": "EMPTY_FINISHED_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 4,
+      "description": "AGV01 drops CHIP to conveyor start and AGV02 drops empty finished box to finished box storage",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "UNLOADING",
+          "from": "CONVEYOR_START",
+          "to": "CONVEYOR_START",
+          "route": null,
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "DROP_EMPTY_BOX",
+          "status": "UNLOADING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": null,
+          "payload": "EMPTY_FINISHED_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 5,
+      "description": "AGV01 returns to material storage and AGV02 moves to inbound",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "MOVING",
+          "from": "CONVEYOR_START",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "CONVEYOR_START_TO_MATERIAL_BOX_STORAGE",
+          "payload": "EMPTY"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_INBOUND",
+          "status": "MOVING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "INBOUND",
+          "route": "FINISHED_BOX_STORAGE_TO_INBOUND",
+          "payload": "EMPTY"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 6,
+      "description": "AGV01 picks SENSOR and AGV02 picks supply box from inbound",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "LOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_INBOUND",
+          "status": "LOADING",
+          "from": "INBOUND",
+          "to": "INBOUND",
+          "route": null,
+          "payload": "SUPPLY_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 7,
+      "description": "AGV01 moves to conveyor start with SENSOR and AGV02 moves to cross full-box stop with supply box",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "MOVING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "CONVEYOR_START",
+          "route": "MATERIAL_BOX_STORAGE_TO_CONVEYOR_START",
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "DROP_TO_CROSS",
+          "status": "MOVING",
+          "from": "INBOUND",
+          "to": "CROSS_FULL_BOX_STOP",
+          "route": "INBOUND_TO_CROSS_FULL_BOX_STOP",
+          "payload": "SUPPLY_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 8,
+      "description": "AGV01 drops SENSOR to conveyor start and AGV02 drops supply box to cross full-box stop",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "UNLOADING",
+          "from": "CONVEYOR_START",
+          "to": "CONVEYOR_START",
+          "route": null,
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "DROP_TO_CROSS",
+          "status": "UNLOADING",
+          "from": "CROSS_FULL_BOX_STOP",
+          "to": "CROSS_FULL_BOX_STOP",
+          "route": null,
+          "payload": "SUPPLY_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 9,
+      "description": "AGV01 moves to material storage for empty box and AGV02 moves from cross full-box stop to conveyor end",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_EMPTY_BOX",
+          "status": "MOVING",
+          "from": "CONVEYOR_START",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "CONVEYOR_START_TO_MATERIAL_BOX_STORAGE",
+          "payload": "EMPTY"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CONVEYOR",
+          "status": "MOVING",
+          "from": "CROSS_FULL_BOX_STOP",
+          "to": "CONVEYOR_END",
+          "route": "CROSS_FULL_BOX_STOP_TO_CONVEYOR_END",
+          "payload": "EMPTY"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 10,
+      "description": "AGV01 picks empty material box and AGV02 picks CHIP from conveyor end",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_EMPTY_BOX",
+          "status": "LOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "EMPTY_MATERIAL_BOX"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CONVEYOR",
+          "status": "LOADING",
+          "from": "CONVEYOR_END",
+          "to": "CONVEYOR_END",
+          "route": null,
+          "payload": "CHIP"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 11,
+      "description": "AGV01 moves to cross empty-box stop with empty material box and AGV02 moves to finished box storage with CHIP",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CROSS",
+          "status": "MOVING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "CROSS_EMPTY_BOX_STOP",
+          "route": "MATERIAL_BOX_STORAGE_TO_CROSS_EMPTY_BOX_STOP",
+          "payload": "EMPTY_MATERIAL_BOX"
+        },
+        "AGV02": {
+          "command": "DROP_TO_FINISHED_BOX_STORAGE",
+          "status": "MOVING",
+          "from": "CONVEYOR_END",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": "CONVEYOR_END_TO_FINISHED_BOX_STORAGE",
+          "payload": "CHIP"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 12,
+      "description": "AGV01 drops empty material box to cross empty-box stop and AGV02 drops CHIP to finished box storage",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CROSS",
+          "status": "UNLOADING",
+          "from": "CROSS_EMPTY_BOX_STOP",
+          "to": "CROSS_EMPTY_BOX_STOP",
+          "route": null,
+          "payload": "EMPTY_MATERIAL_BOX"
+        },
+        "AGV02": {
+          "command": "DROP_TO_FINISHED_BOX_STORAGE",
+          "status": "UNLOADING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": null,
+          "payload": "CHIP"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 13,
+      "description": "AGV01 moves from cross empty-box stop to cross full-box stop to pick supply box, and AGV02 moves to conveyor end",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_CROSS",
+          "status": "MOVING",
+          "from": "CROSS_EMPTY_BOX_STOP",
+          "to": "CROSS_FULL_BOX_STOP",
+          "route": "CROSS_EMPTY_BOX_STOP_TO_CROSS_FULL_BOX_STOP",
+          "payload": "SUPPLY_BOX",
+          "note": "AGV01 already dropped EMPTY_MATERIAL_BOX at CROSS_EMPTY_BOX_STOP in step 12; in this step it moves 9 -> 7 and conceptually picks SUPPLY_BOX at CROSS_FULL_BOX_STOP."
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CONVEYOR",
+          "status": "MOVING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "CONVEYOR_END",
+          "route": "FINISHED_BOX_STORAGE_TO_CONVEYOR_END",
+          "payload": "EMPTY"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 14,
+      "description": "AGV01 moves to material storage from cross full-box stop with supply box and AGV02 picks SENSOR from conveyor end",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_STORAGE",
+          "status": "MOVING",
+          "from": "CROSS_FULL_BOX_STOP",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "CROSS_FULL_BOX_STOP_TO_MATERIAL_BOX_STORAGE",
+          "payload": "SUPPLY_BOX"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CONVEYOR",
+          "status": "LOADING",
+          "from": "CONVEYOR_END",
+          "to": "CONVEYOR_END",
+          "route": null,
+          "payload": "SENSOR"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 15,
+      "description": "AGV01 drops supply box to material storage and AGV02 moves to finished box storage with SENSOR",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_STORAGE",
+          "status": "UNLOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "SUPPLY_BOX"
+        },
+        "AGV02": {
+          "command": "DROP_TO_FINISHED_BOX_STORAGE",
+          "status": "MOVING",
+          "from": "CONVEYOR_END",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": "CONVEYOR_END_TO_FINISHED_BOX_STORAGE",
+          "payload": "SENSOR"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 16,
+      "description": "AGV01 picks CHIP and AGV02 drops SENSOR to finished box storage. CAR_CONTROL_UNIT is completed.",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "LOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "DROP_TO_FINISHED_BOX_STORAGE",
+          "status": "UNLOADING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": null,
+          "payload": "SENSOR"
+        }
+      },
+      "transition": {
+        "type": "after_duration",
+        "duration_sec": 1.5
+      }
+    },
+    {
+      "step": 17,
+      "description": "AGV01 moves to conveyor start with CHIP and AGV02 picks completed finished box",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "MOVING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "CONVEYOR_START",
+          "route": "MATERIAL_BOX_STORAGE_TO_CONVEYOR_START",
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_FINISHED_BOX_STORAGE",
+          "status": "LOADING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "FINISHED_BOX_STORAGE",
+          "route": null,
+          "payload": "FINISHED_BOX_CAR_CONTROL_UNIT"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 18,
+      "description": "AGV01 drops CHIP to conveyor start and AGV02 moves to outbound with finished box",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "UNLOADING",
+          "from": "CONVEYOR_START",
+          "to": "CONVEYOR_START",
+          "route": null,
+          "payload": "CHIP"
+        },
+        "AGV02": {
+          "command": "DROP_TO_OUTBOUND",
+          "status": "MOVING",
+          "from": "FINISHED_BOX_STORAGE",
+          "to": "OUTBOUND",
+          "route": "FINISHED_BOX_STORAGE_TO_OUTBOUND",
+          "payload": "FINISHED_BOX_CAR_CONTROL_UNIT"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 19,
+      "description": "AGV01 moves to material storage and AGV02 drops finished box to outbound",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "MOVING",
+          "from": "CONVEYOR_START",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "CONVEYOR_START_TO_MATERIAL_BOX_STORAGE",
+          "payload": "EMPTY"
+        },
+        "AGV02": {
+          "command": "DROP_TO_OUTBOUND",
+          "status": "UNLOADING",
+          "from": "OUTBOUND",
+          "to": "OUTBOUND",
+          "route": null,
+          "payload": "FINISHED_BOX_CAR_CONTROL_UNIT"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 20,
+      "description": "AGV01 picks SENSOR and AGV02 moves from outbound to cross empty-box stop to collect empty material box",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "LOADING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": null,
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CROSS",
+          "status": "MOVING",
+          "from": "OUTBOUND",
+          "to": "CROSS_EMPTY_BOX_STOP",
+          "route": "OUTBOUND_TO_CROSS_EMPTY_BOX_STOP",
+          "payload": "EMPTY",
+          "note": "AGV02 finished outbound unloading in step 19, so it starts from OUTBOUND and moves to CROSS_EMPTY_BOX_STOP."
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 21,
+      "description": "AGV01 moves to conveyor start with SENSOR and AGV02 picks empty material box from cross empty-box stop",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "MOVING",
+          "from": "MATERIAL_BOX_STORAGE",
+          "to": "CONVEYOR_START",
+          "route": "MATERIAL_BOX_STORAGE_TO_CONVEYOR_START",
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "PICK_FROM_CROSS",
+          "status": "LOADING",
+          "from": "CROSS_EMPTY_BOX_STOP",
+          "to": "CROSS_EMPTY_BOX_STOP",
+          "route": null,
+          "payload": "EMPTY_MATERIAL_BOX",
+          "note": "This is the empty material box that AGV01 dropped at CROSS_EMPTY_BOX_STOP in step 12."
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 22,
+      "description": "AGV01 drops SENSOR to conveyor start and AGV02 moves to inbound with empty material box",
+      "agvs": {
+        "AGV01": {
+          "command": "DROP_TO_CONVEYOR",
+          "status": "UNLOADING",
+          "from": "CONVEYOR_START",
+          "to": "CONVEYOR_START",
+          "route": null,
+          "payload": "SENSOR"
+        },
+        "AGV02": {
+          "command": "DROP_TO_INBOUND",
+          "status": "MOVING",
+          "from": "CROSS_EMPTY_BOX_STOP",
+          "to": "INBOUND",
+          "route": "CROSS_EMPTY_BOX_STOP_TO_INBOUND",
+          "payload": "EMPTY_MATERIAL_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    },
+    {
+      "step": 23,
+      "description": "AGV01 returns to material storage and AGV02 drops empty material box to inbound",
+      "agvs": {
+        "AGV01": {
+          "command": "PICK_FROM_STORAGE",
+          "status": "MOVING",
+          "from": "CONVEYOR_START",
+          "to": "MATERIAL_BOX_STORAGE",
+          "route": "CONVEYOR_START_TO_MATERIAL_BOX_STORAGE",
+          "payload": "EMPTY"
+        },
+        "AGV02": {
+          "command": "DROP_TO_INBOUND",
+          "status": "UNLOADING",
+          "from": "INBOUND",
+          "to": "INBOUND",
+          "route": null,
+          "payload": "EMPTY_MATERIAL_BOX"
+        }
+      },
+      "transition": {
+        "type": "after_both_agv_done"
+      }
+    }
+  ],
+  "cross_zone_stop_rule": {
+    "CROSS_FULL_BOX_STOP": {
+      "waypoint": 7,
+      "meaning": "꽉 찬 보급 상자 하역 및 픽업 위치",
+      "payloads": [
+        "SUPPLY_BOX"
+      ]
+    },
+    "CROSS_EMPTY_BOX_STOP": {
+      "waypoint": 9,
+      "meaning": "빈 자재 상자 하역 및 회수 위치",
+      "payloads": [
+        "EMPTY_MATERIAL_BOX"
+      ]
+    },
+    "legacy_CROSS_ZONE": {
+      "waypoint": 7,
+      "meaning": "이전 호환용 이름. 교차구역 작업 step에서는 FULL/EMPTY stop을 사용."
+    }
+  },
+  "validation_note": "V3 validation target: AGV01 drops EMPTY_MATERIAL_BOX at CROSS_EMPTY_BOX_STOP in step 12; AGV02 collects it in steps 20~21 and returns it to INBOUND in steps 22~23. SUPPLY_BOX uses CROSS_FULL_BOX_STOP(7), EMPTY_MATERIAL_BOX uses CROSS_EMPTY_BOX_STOP(9). DROP_TO_INBOUND is added for local scenario execution/server alignment."
+}

@@ -1,0 +1,678 @@
+{
+  "description": "Zone-to-waypoint route map for final Gazebo AGV MAP. INBOUND/OUTBOUND routes use 9 -> 15 -> 16 -> 17. Cross-zone routes are split by box role: full supply box uses waypoint 7, empty box uses waypoint 9. Waypoint 18 is intentionally not used. Includes explicit routes for AGV02 empty material box return: OUTBOUND_TO_CROSS_EMPTY_BOX_STOP and CROSS_EMPTY_BOX_STOP_TO_INBOUND.",
+  "version": "final_cross_7_9_v2_empty_box_return",
+  "line_path_map": "line_path_map_final_v6_cross_7_9_names.json",
+  "route_rule": {
+    "waypoint_type": "virtual black-line route waypoint",
+    "not_physical_marker": true,
+    "inout_branch": [
+      9,
+      15,
+      16,
+      17
+    ],
+    "inbound_stop_waypoint": 17,
+    "outbound_stop_waypoint": 17,
+    "test_speed": 4.0,
+    "note": "INBOUND and OUTBOUND share waypoint 17 as the AGV stop point. Actual box/tray positions are handled separately by object movement code.",
+    "cross_full_box_stop_waypoint": 7,
+    "cross_empty_box_stop_waypoint": 9,
+    "cross_full_box_rule": "full supply box loading/unloading uses waypoint 7",
+    "cross_empty_box_rule": "empty box loading/unloading uses waypoint 9",
+    "note_cross_zone": "Generic CROSS_ZONE remains waypoint 7 for backward compatibility. For new scenario steps, use explicit CROSS_FULL_BOX_STOP or CROSS_EMPTY_BOX_STOP routes.",
+    "empty_material_box_return_rule": "After outbound unloading, AGV02 moves OUTBOUND -> CROSS_EMPTY_BOX_STOP, picks EMPTY_MATERIAL_BOX, then moves CROSS_EMPTY_BOX_STOP -> INBOUND."
+  },
+  "zone_waypoint_map": {
+    "AGV01_START": 5,
+    "AGV02_START": 13,
+    "MATERIAL_BOX_STORAGE": 4,
+    "CONVEYOR_START": 1,
+    "CONVETOR_START": 1,
+    "CONVEYOR_END": 14,
+    "CONVETOR_END": 14,
+    "FINISHED_BOX_STORAGE": 11,
+    "INBOUND": 17,
+    "OUTBOUND": 17,
+    "CROSS_ZONE": 7,
+    "CROSS_FULL_BOX_STOP": 7,
+    "CROSS_EMPTY_BOX_STOP": 9
+  },
+  "temporary_zone_marker_rule": {
+    "AGV01_START": 5,
+    "AGV02_START": 13,
+    "MATERIAL_BOX_STORAGE": 4,
+    "CONVEYOR_START": 1,
+    "CONVETOR_START": 1,
+    "CONVEYOR_END": 14,
+    "CONVETOR_END": 14,
+    "FINISHED_BOX_STORAGE": 11,
+    "INBOUND": 17,
+    "OUTBOUND": 17,
+    "CROSS_ZONE": 7,
+    "CROSS_FULL_BOX_STOP": 7,
+    "CROSS_EMPTY_BOX_STOP": 9
+  },
+  "routes": {
+    "AGV01_START_TO_MATERIAL_BOX_STORAGE": [
+      5,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_AGV01_START": [
+      4,
+      5
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CONVEYOR_START": [
+      4,
+      3,
+      2,
+      1
+    ],
+    "CONVEYOR_START_TO_MATERIAL_BOX_STORAGE": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CONVETOR_START": [
+      4,
+      3,
+      2,
+      1
+    ],
+    "CONVETOR_START_TO_MATERIAL_BOX_STORAGE": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CROSS_ZONE": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "CROSS_ZONE_TO_MATERIAL_BOX_STORAGE": [
+      7,
+      6,
+      5,
+      4
+    ],
+    "CONVEYOR_START_TO_CROSS_ZONE": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_ZONE_TO_CONVEYOR_START": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CONVETOR_START_TO_CROSS_ZONE": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_ZONE_TO_CONVETOR_START": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CROSS_ZONE_TO_CONVEYOR_END": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVEYOR_END_TO_CROSS_ZONE": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_ZONE_TO_CONVETOR_END": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVETOR_END_TO_CROSS_ZONE": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CONVEYOR_END_TO_FINISHED_BOX_STORAGE": [
+      14,
+      13,
+      12,
+      11
+    ],
+    "FINISHED_BOX_STORAGE_TO_CONVEYOR_END": [
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVETOR_END_TO_FINISHED_BOX_STORAGE": [
+      14,
+      13,
+      12,
+      11
+    ],
+    "FINISHED_BOX_STORAGE_TO_CONVETOR_END": [
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVEYOR_END_TO_MATERIAL_BOX_STORAGE": [
+      14,
+      1,
+      2,
+      3,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CONVEYOR_END": [
+      4,
+      3,
+      2,
+      1,
+      14
+    ],
+    "CONVETOR_END_TO_MATERIAL_BOX_STORAGE": [
+      14,
+      1,
+      2,
+      3,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CONVETOR_END": [
+      4,
+      3,
+      2,
+      1,
+      14
+    ],
+    "AGV02_START_TO_INBOUND": [
+      13,
+      12,
+      11,
+      10,
+      9,
+      15,
+      16,
+      17
+    ],
+    "INBOUND_TO_AGV02_START": [
+      17,
+      16,
+      15,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "AGV02_START_TO_OUTBOUND": [
+      13,
+      12,
+      11,
+      10,
+      9,
+      15,
+      16,
+      17
+    ],
+    "OUTBOUND_TO_AGV02_START": [
+      17,
+      16,
+      15,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "INBOUND_TO_FINISHED_BOX_STORAGE": [
+      17,
+      16,
+      15,
+      9,
+      10,
+      11
+    ],
+    "FINISHED_BOX_STORAGE_TO_INBOUND": [
+      11,
+      10,
+      9,
+      15,
+      16,
+      17
+    ],
+    "OUTBOUND_TO_FINISHED_BOX_STORAGE": [
+      17,
+      16,
+      15,
+      9,
+      10,
+      11
+    ],
+    "FINISHED_BOX_STORAGE_TO_OUTBOUND": [
+      11,
+      10,
+      9,
+      15,
+      16,
+      17
+    ],
+    "INBOUND_TO_CROSS_ZONE": [
+      17,
+      16,
+      15,
+      9,
+      8,
+      7
+    ],
+    "CROSS_ZONE_TO_INBOUND": [
+      7,
+      8,
+      9,
+      15,
+      16,
+      17
+    ],
+    "OUTBOUND_TO_CROSS_ZONE": [
+      17,
+      16,
+      15,
+      9,
+      8,
+      7
+    ],
+    "CROSS_ZONE_TO_OUTBOUND": [
+      7,
+      8,
+      9,
+      15,
+      16,
+      17
+    ],
+    "FINISHED_BOX_STORAGE_TO_AGV02_START": [
+      11,
+      12,
+      13
+    ],
+    "AGV02_START_TO_FINISHED_BOX_STORAGE": [
+      13,
+      12,
+      11
+    ],
+    "AGV01_START_TO_CROSS_FULL_BOX_STOP": [
+      5,
+      6,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_AGV01_START": [
+      7,
+      6,
+      5
+    ],
+    "AGV01_START_TO_CROSS_EMPTY_BOX_STOP": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_AGV01_START": [
+      9,
+      8,
+      7,
+      6,
+      5
+    ],
+    "AGV02_START_TO_CROSS_FULL_BOX_STOP": [
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_AGV02_START": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "AGV02_START_TO_CROSS_EMPTY_BOX_STOP": [
+      13,
+      12,
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_AGV02_START": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CROSS_FULL_BOX_STOP": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_MATERIAL_BOX_STORAGE": [
+      7,
+      6,
+      5,
+      4
+    ],
+    "MATERIAL_BOX_STORAGE_TO_CROSS_EMPTY_BOX_STOP": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_MATERIAL_BOX_STORAGE": [
+      9,
+      8,
+      7,
+      6,
+      5,
+      4
+    ],
+    "CONVEYOR_START_TO_CROSS_FULL_BOX_STOP": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_CONVEYOR_START": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CONVEYOR_START_TO_CROSS_EMPTY_BOX_STOP": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_CONVEYOR_START": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CONVETOR_START_TO_CROSS_FULL_BOX_STOP": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_CONVETOR_START": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CONVETOR_START_TO_CROSS_EMPTY_BOX_STOP": [
+      1,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_CONVETOR_START": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      1
+    ],
+    "CONVEYOR_END_TO_CROSS_FULL_BOX_STOP": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_CONVEYOR_END": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVEYOR_END_TO_CROSS_EMPTY_BOX_STOP": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_CONVEYOR_END": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVETOR_END_TO_CROSS_FULL_BOX_STOP": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_CONVETOR_END": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "CONVETOR_END_TO_CROSS_EMPTY_BOX_STOP": [
+      14,
+      13,
+      12,
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_CONVETOR_END": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "FINISHED_BOX_STORAGE_TO_CROSS_FULL_BOX_STOP": [
+      11,
+      10,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_FINISHED_BOX_STORAGE": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "FINISHED_BOX_STORAGE_TO_CROSS_EMPTY_BOX_STOP": [
+      11,
+      10,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_FINISHED_BOX_STORAGE": [
+      9,
+      10,
+      11
+    ],
+    "INBOUND_TO_CROSS_FULL_BOX_STOP": [
+      17,
+      16,
+      15,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_INBOUND": [
+      7,
+      8,
+      9,
+      15,
+      16,
+      17
+    ],
+    "INBOUND_TO_CROSS_EMPTY_BOX_STOP": [
+      17,
+      16,
+      15,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_INBOUND": [
+      9,
+      15,
+      16,
+      17
+    ],
+    "OUTBOUND_TO_CROSS_FULL_BOX_STOP": [
+      17,
+      16,
+      15,
+      9,
+      8,
+      7
+    ],
+    "CROSS_FULL_BOX_STOP_TO_OUTBOUND": [
+      7,
+      8,
+      9,
+      15,
+      16,
+      17
+    ],
+    "OUTBOUND_TO_CROSS_EMPTY_BOX_STOP": [
+      17,
+      16,
+      15,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_OUTBOUND": [
+      9,
+      15,
+      16,
+      17
+    ],
+    "CROSS_FULL_BOX_STOP_TO_CROSS_EMPTY_BOX_STOP": [
+      7,
+      8,
+      9
+    ],
+    "CROSS_EMPTY_BOX_STOP_TO_CROSS_FULL_BOX_STOP": [
+      9,
+      8,
+      7
+    ]
+  },
+  "validation": "OK: explicit cross-zone routes added. Full supply box routes end/start at waypoint 7; empty box routes end/start at waypoint 9. Generic CROSS_ZONE remains waypoint 7 for backward compatibility. Waypoint 18 is not used. V2 OK: empty material box return routes are available for scenario steps 20~23."
+}

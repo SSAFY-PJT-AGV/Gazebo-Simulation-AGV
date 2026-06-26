@@ -1,0 +1,874 @@
+{
+  "description": "Stable final object motion config through step 23. Uses instant pick/drop, faster AGV/conveyor timing, fixed object pose enforcement, one-object SUPPLY_BOX, and ignores step 24+. Added preset states for direct testing of step5, step6, step10, step13, and step20 ranges.",
+  "version": "final_step23_v3_preset",
+  "default_payload_offset": [
+    0.0,
+    0.0,
+    0.25
+  ],
+  "payload_offsets": {
+    "AGV01": [
+      0.0,
+      0.0,
+      0.25
+    ],
+    "AGV02": [
+      0.0,
+      0.0,
+      0.25
+    ]
+  },
+  "payload_stack_gap": 0.18,
+  "object_groups": {
+    "SUPPLY_BOX_GROUP": [
+      "obj_supply_box_01"
+    ],
+    "FINISHED_BOX_CAR_CONTROL_UNIT_GROUP": [
+      "obj_finished_box_01",
+      "obj_red_cube_03",
+      "obj_blue_cube_03"
+    ]
+  },
+  "positions": {
+    "AGV01_AT_MATERIAL_STORAGE": [
+      0.0,
+      -2.55,
+      0.16
+    ],
+    "AGV01_AT_CONVEYOR_START": [
+      -2.7831,
+      -2.0241,
+      0.16
+    ],
+    "AGV01_AT_CROSS_FULL_BOX_STOP": [
+      2.623,
+      -0.8,
+      0.16
+    ],
+    "AGV01_AT_CROSS_EMPTY_BOX_STOP": [
+      2.623,
+      1.4,
+      0.16
+    ],
+    "AGV02_AT_INBOUND": [
+      2.623,
+      4.9,
+      0.16
+    ],
+    "AGV02_AT_CONVEYOR_END": [
+      -2.881,
+      1.45,
+      0.16
+    ],
+    "AGV02_AT_FINISHED_BOX_STORAGE": [
+      1.075,
+      2.25,
+      0.16
+    ],
+    "AGV02_AT_OUTBOUND": [
+      2.623,
+      4.9,
+      0.16
+    ],
+    "AGV02_AT_CROSS_EMPTY_BOX_STOP": [
+      2.623,
+      1.4,
+      0.16
+    ],
+    "SRC_CHIP_RED_CUBE": [
+      0.0688,
+      -1.34,
+      0.245
+    ],
+    "SRC_SENSOR_BLUE_CUBE": [
+      -1.0922,
+      -1.34,
+      0.245
+    ],
+    "SRC_EMPTY_FINISHED_BOX_PURPLE": [
+      1.763,
+      2.91,
+      0.0
+    ],
+    "SRC_EMPTY_MATERIAL_BOX_ORANGE": [
+      0.258,
+      -1.12,
+      0.0
+    ],
+    "SRC_SUPPLY_BOX": [
+      1.763,
+      4.85,
+      0.0
+    ],
+    "SRC_SUPPLY_CUBE_01": [
+      1.5738,
+      5.07,
+      0.245
+    ],
+    "SRC_SUPPLY_CUBE_02": [
+      1.9522,
+      5.07,
+      0.245
+    ],
+    "SRC_SUPPLY_CUBE_03": [
+      1.5738,
+      4.63,
+      0.245
+    ],
+    "SRC_SUPPLY_CUBE_04": [
+      1.9522,
+      4.63,
+      0.245
+    ],
+    "CROSS_FULL_BOX_POS": [
+      3.397,
+      -1.35,
+      0.0
+    ],
+    "CROSS_FULL_CUBE_01_POS": [
+      3.2078,
+      -1.13,
+      0.245
+    ],
+    "CROSS_FULL_CUBE_02_POS": [
+      3.5862,
+      -1.13,
+      0.245
+    ],
+    "CROSS_FULL_CUBE_03_POS": [
+      3.2078,
+      -1.57,
+      0.245
+    ],
+    "CROSS_FULL_CUBE_04_POS": [
+      3.5862,
+      -1.57,
+      0.245
+    ],
+    "CROSS_EMPTY_BOX_POS": [
+      3.397,
+      -0.2,
+      0.0
+    ],
+    "MATERIAL_STORAGE_SUPPLY_BOX_POS": [
+      0.258,
+      -1.12,
+      0.0
+    ],
+    "MATERIAL_STORAGE_SUPPLY_CUBE_01_POS": [
+      0.0688,
+      -0.9,
+      0.245
+    ],
+    "MATERIAL_STORAGE_SUPPLY_CUBE_02_POS": [
+      0.4472,
+      -0.9,
+      0.245
+    ],
+    "MATERIAL_STORAGE_SUPPLY_CUBE_03_POS": [
+      0.0688,
+      -1.34,
+      0.245
+    ],
+    "MATERIAL_STORAGE_SUPPLY_CUBE_04_POS": [
+      0.4472,
+      -1.34,
+      0.245
+    ],
+    "CONVEYOR_INPUT_POS": [
+      -2.881,
+      -1.65,
+      0.245
+    ],
+    "CONVEYOR_MID_POS_01": [
+      -2.881,
+      -0.85,
+      0.245
+    ],
+    "CONVEYOR_MID_POS_02": [
+      -2.881,
+      0.1,
+      0.245
+    ],
+    "CONVEYOR_OUTPUT_POS": [
+      -2.881,
+      1.05,
+      0.245
+    ],
+    "FINISHED_STORAGE_EMPTY_BOX_POS": [
+      0.258,
+      0.95,
+      0.0
+    ],
+    "FINISHED_BOX_POS": [
+      -0.903,
+      0.95,
+      0.0
+    ],
+    "FINISHED_BOX_CHIP_POS": [
+      -0.723,
+      0.92,
+      0.245
+    ],
+    "FINISHED_BOX_SENSOR_POS": [
+      -1.083,
+      1.07,
+      0.245
+    ],
+    "OUTBOUND_FINISHED_BOX_POS": [
+      3.397,
+      5.5,
+      0.0
+    ],
+    "OUTBOUND_FINISHED_BOX_CHIP_POS": [
+      3.577,
+      5.47,
+      0.245
+    ],
+    "OUTBOUND_FINISHED_BOX_SENSOR_POS": [
+      3.217,
+      5.62,
+      0.245
+    ],
+    "INBOUND_EMPTY_MATERIAL_BOX_POS": [
+      1.763,
+      2.91,
+      0.0
+    ],
+    "OFFSET_CUBE_SINGLE": [
+      0.0,
+      0.0,
+      0.25
+    ],
+    "OFFSET_BOX_SINGLE": [
+      0.0,
+      0.0,
+      0.08
+    ],
+    "OFFSET_BOX_CENTER": [
+      0.0,
+      0.0,
+      0.08
+    ],
+    "OFFSET_CUBE_LEFT_TOP": [
+      -0.1892,
+      0.22,
+      0.245
+    ],
+    "OFFSET_CUBE_RIGHT_TOP": [
+      0.1892,
+      0.22,
+      0.245
+    ],
+    "OFFSET_CUBE_LEFT_BOTTOM": [
+      -0.1892,
+      -0.22,
+      0.245
+    ],
+    "OFFSET_CUBE_RIGHT_BOTTOM": [
+      0.1892,
+      -0.22,
+      0.245
+    ],
+    "OFFSET_FINISHED_CHIP": [
+      0.18,
+      -0.03,
+      0.245
+    ],
+    "OFFSET_FINISHED_SENSOR": [
+      -0.18,
+      0.12,
+      0.245
+    ],
+    "AGV02_AT_CROSS_FULL_BOX_STOP": [
+      2.623,
+      -0.8,
+      0.16
+    ]
+  },
+  "conveyor_paths": {
+    "default": [
+      [
+        -2.881,
+        -1.65,
+        0.245
+      ],
+      [
+        -2.881,
+        -0.85,
+        0.245
+      ],
+      [
+        -2.881,
+        0.1,
+        0.245
+      ],
+      [
+        -2.881,
+        1.05,
+        0.245
+      ]
+    ]
+  },
+  "loading_rules": [
+    {
+      "step": 2,
+      "agv": "AGV01",
+      "command": "PICK_FROM_STORAGE",
+      "payload": "CHIP",
+      "object": "obj_red_cube_03",
+      "source_position_key": "SRC_CHIP_RED_CUBE",
+      "agv_pose_key": "AGV01_AT_MATERIAL_STORAGE",
+      "payload_offsets": [
+        "OFFSET_CUBE_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 2,
+      "agv": "AGV02",
+      "command": "PICK_FROM_INBOUND",
+      "payload": "EMPTY_FINISHED_BOX",
+      "object": "obj_inbound_empty_finished_box_02",
+      "source_position_key": "SRC_EMPTY_FINISHED_BOX_PURPLE",
+      "agv_pose_key": "AGV02_AT_INBOUND",
+      "payload_offsets": [
+        "OFFSET_BOX_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 6,
+      "agv": "AGV01",
+      "command": "PICK_FROM_STORAGE",
+      "payload": "SENSOR",
+      "object": "obj_blue_cube_03",
+      "source_position_key": "SRC_SENSOR_BLUE_CUBE",
+      "agv_pose_key": "AGV01_AT_MATERIAL_STORAGE",
+      "payload_offsets": [
+        "OFFSET_CUBE_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 6,
+      "agv": "AGV02",
+      "command": "PICK_FROM_INBOUND",
+      "payload": "SUPPLY_BOX",
+      "agv_pose_key": "AGV02_AT_INBOUND",
+      "payload_offsets": [
+        "OFFSET_BOX_SINGLE"
+      ],
+      "duration": 0.0,
+      "source_position_key": "SRC_SUPPLY_BOX",
+      "object": "obj_supply_box_01"
+    },
+    {
+      "step": 10,
+      "agv": "AGV01",
+      "command": "PICK_EMPTY_BOX",
+      "payload": "EMPTY_MATERIAL_BOX",
+      "object": "obj_material_red_box_01",
+      "source_position_key": "SRC_EMPTY_MATERIAL_BOX_ORANGE",
+      "agv_pose_key": "AGV01_AT_MATERIAL_STORAGE",
+      "payload_offsets": [
+        "OFFSET_BOX_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 10,
+      "agv": "AGV02",
+      "command": "PICK_FROM_CONVEYOR",
+      "payload": "CHIP",
+      "object": "obj_red_cube_03",
+      "source_position_key": "CONVEYOR_OUTPUT_POS",
+      "agv_pose_key": "AGV02_AT_CONVEYOR_END",
+      "payload_offsets": [
+        "OFFSET_CUBE_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 14,
+      "agv": "AGV02",
+      "command": "PICK_FROM_CONVEYOR",
+      "payload": "SENSOR",
+      "object": "obj_blue_cube_03",
+      "source_position_key": "CONVEYOR_OUTPUT_POS",
+      "agv_pose_key": "AGV02_AT_CONVEYOR_END",
+      "payload_offsets": [
+        "OFFSET_CUBE_SINGLE"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 17,
+      "agv": "AGV02",
+      "command": "PICK_FROM_FINISHED_BOX_STORAGE",
+      "payload": "FINISHED_BOX_CAR_CONTROL_UNIT",
+      "object_group": "FINISHED_BOX_CAR_CONTROL_UNIT_GROUP",
+      "source_position_keys": [
+        "FINISHED_BOX_POS",
+        "FINISHED_BOX_CHIP_POS",
+        "FINISHED_BOX_SENSOR_POS"
+      ],
+      "agv_pose_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+      "payload_offsets": [
+        "OFFSET_BOX_CENTER",
+        "OFFSET_FINISHED_CHIP",
+        "OFFSET_FINISHED_SENSOR"
+      ],
+      "duration": 0.0
+    },
+    {
+      "step": 21,
+      "agv": "AGV02",
+      "command": "PICK_FROM_CROSS",
+      "payload": "EMPTY_MATERIAL_BOX",
+      "object": "obj_material_red_box_01",
+      "source_position_key": "CROSS_EMPTY_BOX_POS",
+      "agv_pose_key": "AGV02_AT_CROSS_EMPTY_BOX_STOP",
+      "payload_offsets": [
+        "OFFSET_BOX_SINGLE"
+      ],
+      "duration": 0.0
+    }
+  ],
+  "post_move_loading_rules": [
+    {
+      "step": 13,
+      "agv": "AGV01",
+      "command": "PICK_FROM_CROSS",
+      "payload": "SUPPLY_BOX",
+      "agv_pose_key": "AGV01_AT_CROSS_FULL_BOX_STOP",
+      "payload_offsets": [
+        "OFFSET_BOX_SINGLE"
+      ],
+      "duration": 0.0,
+      "source_position_key": "CROSS_FULL_BOX_POS",
+      "object": "obj_supply_box_01"
+    }
+  ],
+  "unloading_rules": [
+    {
+      "step": 4,
+      "agv": "AGV01",
+      "command": "DROP_TO_CONVEYOR",
+      "payload": "CHIP",
+      "object": "obj_red_cube_03",
+      "target_position_key": "CONVEYOR_INPUT_POS",
+      "agv_pose_key": "AGV01_AT_CONVEYOR_START",
+      "duration": 0.0,
+      "conveyor_after_drop": true,
+      "conveyor_path": "default",
+      "conveyor_duration": 0.6
+    },
+    {
+      "step": 4,
+      "agv": "AGV02",
+      "command": "DROP_EMPTY_BOX",
+      "payload": "EMPTY_FINISHED_BOX",
+      "object": "obj_inbound_empty_finished_box_02",
+      "target_position_key": "FINISHED_STORAGE_EMPTY_BOX_POS",
+      "agv_pose_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+      "duration": 0.0
+    },
+    {
+      "step": 8,
+      "agv": "AGV01",
+      "command": "DROP_TO_CONVEYOR",
+      "payload": "SENSOR",
+      "object": "obj_blue_cube_03",
+      "target_position_key": "CONVEYOR_INPUT_POS",
+      "agv_pose_key": "AGV01_AT_CONVEYOR_START",
+      "duration": 0.0,
+      "conveyor_after_drop": true,
+      "conveyor_path": "default",
+      "conveyor_duration": 0.6
+    },
+    {
+      "step": 8,
+      "agv": "AGV02",
+      "command": "DROP_TO_CROSS",
+      "payload": "SUPPLY_BOX",
+      "agv_pose_key": "AGV02_AT_CROSS_FULL_BOX_STOP",
+      "duration": 0.0,
+      "target_position_key": "CROSS_FULL_BOX_POS",
+      "object": "obj_supply_box_01"
+    },
+    {
+      "step": 12,
+      "agv": "AGV01",
+      "command": "DROP_TO_CROSS",
+      "payload": "EMPTY_MATERIAL_BOX",
+      "object": "obj_material_red_box_01",
+      "target_position_key": "CROSS_EMPTY_BOX_POS",
+      "agv_pose_key": "AGV01_AT_CROSS_EMPTY_BOX_STOP",
+      "duration": 0.0
+    },
+    {
+      "step": 12,
+      "agv": "AGV02",
+      "command": "DROP_TO_FINISHED_BOX_STORAGE",
+      "payload": "CHIP",
+      "object": "obj_red_cube_03",
+      "target_position_key": "FINISHED_BOX_CHIP_POS",
+      "agv_pose_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+      "duration": 0.0
+    },
+    {
+      "step": 15,
+      "agv": "AGV01",
+      "command": "DROP_TO_STORAGE",
+      "payload": "SUPPLY_BOX",
+      "agv_pose_key": "AGV01_AT_MATERIAL_STORAGE",
+      "duration": 0.0,
+      "target_position_key": "MATERIAL_STORAGE_SUPPLY_BOX_POS",
+      "object": "obj_supply_box_01"
+    },
+    {
+      "step": 16,
+      "agv": "AGV02",
+      "command": "DROP_TO_FINISHED_BOX_STORAGE",
+      "payload": "SENSOR",
+      "object": "obj_blue_cube_03",
+      "target_position_key": "FINISHED_BOX_SENSOR_POS",
+      "agv_pose_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+      "duration": 0.0
+    },
+    {
+      "step": 19,
+      "agv": "AGV02",
+      "command": "DROP_TO_OUTBOUND",
+      "payload": "FINISHED_BOX_CAR_CONTROL_UNIT",
+      "object_group": "FINISHED_BOX_CAR_CONTROL_UNIT_GROUP",
+      "target_positions": [
+        "OUTBOUND_FINISHED_BOX_POS",
+        "OUTBOUND_FINISHED_BOX_CHIP_POS",
+        "OUTBOUND_FINISHED_BOX_SENSOR_POS"
+      ],
+      "agv_pose_key": "AGV02_AT_OUTBOUND",
+      "duration": 0.0
+    },
+    {
+      "step": 23,
+      "agv": "AGV02",
+      "command": "DROP_TO_INBOUND",
+      "payload": "EMPTY_MATERIAL_BOX",
+      "object": "obj_material_red_box_01",
+      "target_position_key": "INBOUND_EMPTY_MATERIAL_BOX_POS",
+      "agv_pose_key": "AGV02_AT_INBOUND",
+      "duration": 0.0
+    }
+  ],
+  "default_speed_multiplier": 2.0,
+  "action_delay": 0.2,
+  "transition_duration_scale": 0.2,
+  "max_transition_delay": 0.3,
+  "speed_overrides": {
+    "1": {
+      "AGV02": {
+        "multiplier": 3.0
+      }
+    },
+    "3": {
+      "AGV01": {
+        "multiplier": 3.0
+      },
+      "AGV02": {
+        "multiplier": 3.0
+      }
+    },
+    "7": {
+      "AGV02": {
+        "multiplier": 3.0
+      }
+    }
+  },
+  "fixed_object_poses": {
+    "obj_red_cube_03": {
+      "position_key": "SRC_CHIP_RED_CUBE"
+    },
+    "obj_blue_cube_03": {
+      "position_key": "SRC_SENSOR_BLUE_CUBE"
+    },
+    "obj_inbound_empty_finished_box_02": {
+      "position_key": "SRC_EMPTY_FINISHED_BOX_PURPLE"
+    },
+    "obj_supply_box_01": {
+      "position_key": "SRC_SUPPLY_BOX"
+    },
+    "obj_material_red_box_01": {
+      "position_key": "SRC_EMPTY_MATERIAL_BOX_ORANGE"
+    },
+    "obj_finished_box_01": {
+      "position_key": "FINISHED_BOX_POS"
+    },
+    "obj_blue_cube_01": {
+      "position": [
+        -1.0922,
+        -0.9,
+        0.245
+      ]
+    },
+    "obj_blue_cube_02": {
+      "position": [
+        -0.7138,
+        -0.9,
+        0.245
+      ]
+    }
+  },
+  "presets": {
+    "step5": {
+      "description": "State after Step 4. Use for testing Step 5~8.",
+      "agvs": {
+        "AGV01": {
+          "position_key": "AGV01_AT_CONVEYOR_START",
+          "yaw": 0.0
+        },
+        "AGV02": {
+          "position_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+          "yaw": 0.0
+        }
+      },
+      "fixed_objects": {
+        "obj_red_cube_03": {
+          "position_key": "CONVEYOR_OUTPUT_POS"
+        },
+        "obj_blue_cube_03": {
+          "position_key": "SRC_SENSOR_BLUE_CUBE"
+        },
+        "obj_inbound_empty_finished_box_02": {
+          "position_key": "FINISHED_STORAGE_EMPTY_BOX_POS"
+        },
+        "obj_supply_box_01": {
+          "position_key": "SRC_SUPPLY_BOX"
+        },
+        "obj_material_red_box_01": {
+          "position_key": "SRC_EMPTY_MATERIAL_BOX_ORANGE"
+        },
+        "obj_finished_box_01": {
+          "position_key": "FINISHED_BOX_POS"
+        },
+        "obj_blue_cube_01": {
+          "position": [
+            -1.0922,
+            -0.9,
+            0.245
+          ]
+        },
+        "obj_blue_cube_02": {
+          "position": [
+            -0.7138,
+            -0.9,
+            0.245
+          ]
+        }
+      },
+      "conveyor_output_queue": [
+        "obj_red_cube_03"
+      ]
+    },
+    "step6": {
+      "description": "State after Step 5. Use for testing Step 6~9.",
+      "agvs": {
+        "AGV01": {
+          "position_key": "AGV01_AT_MATERIAL_STORAGE",
+          "yaw": 0.0
+        },
+        "AGV02": {
+          "position_key": "AGV02_AT_INBOUND",
+          "yaw": 0.0
+        }
+      },
+      "fixed_objects": {
+        "obj_red_cube_03": {
+          "position_key": "CONVEYOR_OUTPUT_POS"
+        },
+        "obj_blue_cube_03": {
+          "position_key": "SRC_SENSOR_BLUE_CUBE"
+        },
+        "obj_inbound_empty_finished_box_02": {
+          "position_key": "FINISHED_STORAGE_EMPTY_BOX_POS"
+        },
+        "obj_supply_box_01": {
+          "position_key": "SRC_SUPPLY_BOX"
+        },
+        "obj_material_red_box_01": {
+          "position_key": "SRC_EMPTY_MATERIAL_BOX_ORANGE"
+        },
+        "obj_finished_box_01": {
+          "position_key": "FINISHED_BOX_POS"
+        },
+        "obj_blue_cube_01": {
+          "position": [
+            -1.0922,
+            -0.9,
+            0.245
+          ]
+        },
+        "obj_blue_cube_02": {
+          "position": [
+            -0.7138,
+            -0.9,
+            0.245
+          ]
+        }
+      },
+      "conveyor_output_queue": [
+        "obj_red_cube_03"
+      ]
+    },
+    "step10": {
+      "description": "State after Step 9. Use for testing Step 10~12.",
+      "agvs": {
+        "AGV01": {
+          "position_key": "AGV01_AT_MATERIAL_STORAGE",
+          "yaw": 0.0
+        },
+        "AGV02": {
+          "position_key": "AGV02_AT_CONVEYOR_END",
+          "yaw": 0.0
+        }
+      },
+      "fixed_objects": {
+        "obj_red_cube_03": {
+          "position_key": "CONVEYOR_OUTPUT_POS"
+        },
+        "obj_blue_cube_03": {
+          "position_key": "CONVEYOR_OUTPUT_POS"
+        },
+        "obj_inbound_empty_finished_box_02": {
+          "position_key": "FINISHED_STORAGE_EMPTY_BOX_POS"
+        },
+        "obj_supply_box_01": {
+          "position_key": "CROSS_FULL_BOX_POS"
+        },
+        "obj_material_red_box_01": {
+          "position_key": "SRC_EMPTY_MATERIAL_BOX_ORANGE"
+        },
+        "obj_finished_box_01": {
+          "position_key": "FINISHED_BOX_POS"
+        },
+        "obj_blue_cube_01": {
+          "position": [
+            -1.0922,
+            -0.9,
+            0.245
+          ]
+        },
+        "obj_blue_cube_02": {
+          "position": [
+            -0.7138,
+            -0.9,
+            0.245
+          ]
+        }
+      },
+      "conveyor_output_queue": [
+        "obj_red_cube_03",
+        "obj_blue_cube_03"
+      ]
+    },
+    "step13": {
+      "description": "State after Step 12. Use for testing Step 13~15 or Step 13~19.",
+      "agvs": {
+        "AGV01": {
+          "position_key": "AGV01_AT_CROSS_EMPTY_BOX_STOP",
+          "yaw": 0.0
+        },
+        "AGV02": {
+          "position_key": "AGV02_AT_FINISHED_BOX_STORAGE",
+          "yaw": 0.0
+        }
+      },
+      "fixed_objects": {
+        "obj_red_cube_03": {
+          "position_key": "FINISHED_BOX_CHIP_POS"
+        },
+        "obj_blue_cube_03": {
+          "position_key": "CONVEYOR_OUTPUT_POS"
+        },
+        "obj_inbound_empty_finished_box_02": {
+          "position_key": "FINISHED_STORAGE_EMPTY_BOX_POS"
+        },
+        "obj_supply_box_01": {
+          "position_key": "CROSS_FULL_BOX_POS"
+        },
+        "obj_material_red_box_01": {
+          "position_key": "CROSS_EMPTY_BOX_POS"
+        },
+        "obj_finished_box_01": {
+          "position_key": "FINISHED_BOX_POS"
+        },
+        "obj_blue_cube_01": {
+          "position": [
+            -1.0922,
+            -0.9,
+            0.245
+          ]
+        },
+        "obj_blue_cube_02": {
+          "position": [
+            -0.7138,
+            -0.9,
+            0.245
+          ]
+        }
+      },
+      "conveyor_output_queue": [
+        "obj_blue_cube_03"
+      ]
+    },
+    "step20": {
+      "description": "State after Step 19. Use for testing Step 20~23.",
+      "agvs": {
+        "AGV01": {
+          "position_key": "AGV01_AT_MATERIAL_STORAGE",
+          "yaw": 0.0
+        },
+        "AGV02": {
+          "position_key": "AGV02_AT_OUTBOUND",
+          "yaw": 0.0
+        }
+      },
+      "fixed_objects": {
+        "obj_red_cube_03": {
+          "position_key": "OUTBOUND_FINISHED_BOX_CHIP_POS"
+        },
+        "obj_blue_cube_03": {
+          "position_key": "OUTBOUND_FINISHED_BOX_SENSOR_POS"
+        },
+        "obj_inbound_empty_finished_box_02": {
+          "position_key": "FINISHED_STORAGE_EMPTY_BOX_POS"
+        },
+        "obj_supply_box_01": {
+          "position_key": "MATERIAL_STORAGE_SUPPLY_BOX_POS"
+        },
+        "obj_material_red_box_01": {
+          "position_key": "CROSS_EMPTY_BOX_POS"
+        },
+        "obj_finished_box_01": {
+          "position_key": "OUTBOUND_FINISHED_BOX_POS"
+        },
+        "obj_blue_cube_01": {
+          "position": [
+            -1.0922,
+            -0.9,
+            0.245
+          ]
+        },
+        "obj_blue_cube_02": {
+          "position": [
+            -0.7138,
+            -0.9,
+            0.245
+          ]
+        }
+      },
+      "conveyor_output_queue": []
+    }
+  }
+}
