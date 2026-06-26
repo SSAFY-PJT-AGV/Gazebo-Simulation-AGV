@@ -20,7 +20,6 @@
 
 ## 2. 전체 구조
 
-```text
 실제 AGV
     ↓ 상태 / 마커 / 적재 정보 전송
 
@@ -37,7 +36,7 @@ Gazebo Launcher
     ↓
 
 Gazebo 실행
-```
+
 
 시뮬레이션은 크게 두 가지 방식으로 실행할 수 있습니다.
 
@@ -50,40 +49,9 @@ Gazebo 실행
 
 ## 3. 디렉토리 구조
 
-agv_sim/
-├── config/
-│   ├── marker_map.json
-│   ├── line_path_map_final_v6_cross_7_9_names.json
-│   ├── zone_route_map_final_cross_7_9_v2_empty_box_return.json
-│   └── scenario_plan_cross_7_9_v3_empty_box_return.json
-│
-├── scripts/
-│   ├── move_agv_from_scenario_v2_empty_box_return.py
-│   ├── move_agv_from_api.py
-│   ├── move_agv_follow_line_path.py
-│   ├── gazebo_launcher.py
-│   ├── detect_aruco_demo.py
-│   ├── detect_aruco_demo_agv02.py
-│   └── save_camera_frame.py
-│
-├── worlds/
-│   ├── final/
-│   │   ├── make_agv_world_final_box_agv_v2_revised_v7_red_cube_moved.py
-│   │   └── agv_factory_final_box_agv_v2.world
-│   │
-│   ├── aruco_markers/
-│   │   ├── generate_aruco_markers.py
-│   │   └── make_aruco_marker_models.py
-│   │
-│   └── archive/
-│
-├── resource/
-├── test/
-└── README.md
-
 <img width="1045" height="1099" alt="image" src="https://github.com/user-attachments/assets/143304f0-1d9d-49f4-93a2-01df9af11918" />
 
-```
+
 
 ---
 
@@ -150,7 +118,7 @@ Gazebo world 안에는 다음 요소들이 구현되어 있습니다.
 
 ### AGV01 흐름
 
-```text
+
 자재 보관 구역
     ↓
 자재 픽업
@@ -160,11 +128,10 @@ Gazebo world 안에는 다음 요소들이 구현되어 있습니다.
 자재 하역
     ↓
 필요 시 교차구역에서 보급 자재 회수
-```
+
 
 ### AGV02 흐름
 
-```text
 입출고 구역
     ↓
 빈 상자 또는 보급 상자 픽업
