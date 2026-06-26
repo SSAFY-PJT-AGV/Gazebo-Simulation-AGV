@@ -80,6 +80,9 @@ agv_sim/
 ├── resource/
 ├── test/
 └── README.md
+
+<img width="1045" height="1099" alt="image" src="https://github.com/user-attachments/assets/143304f0-1d9d-49f4-93a2-01df9af11918" />
+
 ```
 
 ---
