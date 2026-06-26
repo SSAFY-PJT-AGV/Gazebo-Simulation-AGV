@@ -50,7 +50,6 @@ Gazebo 실행
 
 ## 3. 디렉토리 구조
 
-```text
 agv_sim/
 ├── config/
 │   ├── marker_map.json
